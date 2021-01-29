@@ -1,0 +1,278 @@
+title: Teglholmen
+views:
+  - path: default_view
+    title: Home
+    icon: 'mdi:home'
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: weather-forecast
+            entity: weather.teglholmen
+            show_forecast: true
+            secondary_info_attribute: humidity
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: entities
+                    entities:
+                      - entity: person.adpk
+                        name: Andrii
+                      - entity: sensor.mi_9t_pro_battery_level
+                        name: Battery
+                  - type: entities
+                    entities:
+                      - entity: person.iya
+                        name: Ira
+                      - entity: sensor.sm_g980f_battery_level
+                        name: Battery
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                name: Kitchen Light
+                entity: switch.sonoff_1000b50877
+                icon: 'mdi:ceiling-light'
+                color: auto
+                tap_action:
+                  action: toggle
+              - type: 'custom:button-card'
+                name: Studio Light
+                entity: switch.sonoff_1000b551a1
+                icon: 'mdi:ceiling-light'
+                color: auto
+                tap_action:
+                  action: toggle
+              - type: 'custom:button-card'
+                name: Office Light
+                entity: light.office_light
+                icon: 'mdi:ceiling-light'
+                color: auto
+                color_type: card
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                name: Floor Lamp
+                entity: light.yeelight_color_0x00000000053a2c02
+                icon: 'mdi:floor-lamp'
+                color: auto
+                color_type: card
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+              - type: 'custom:button-card'
+                name: Bedroom Bulb
+                entity: light.yeelight_color_0x0000000005e28b63
+                icon: 'mdi:lightbulb'
+                color: auto
+                color_type: card
+                tap_action:
+                  action: toggle
+              - type: 'custom:button-card'
+                name: All Lights
+                entity: null
+                icon: 'mdi:lightbulb-group'
+                color: auto
+                tap_action:
+                  action: navigate
+                  navigation_path: /lovelace/lights
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:mini-graph-card'
+                name: Temperature
+                icon: 'mdi:thermometer'
+                entities:
+                  - entity: sensor.ble_temperature_master_bedroom_temp_sensor
+                    name: Bedroom
+                    show_state: true
+                    color: green
+                    state_adaptive_color: true
+                  - entity: sensor.ble_temperature_office_temp_sensor
+                    name: Office
+                    show_state: true
+                    state_adaptive_color: true
+                  - entity: sensor.ble_temperature_studio_temp_sensor
+                    name: Studio
+                    show_state: true
+                    state_adaptive_color: true
+                show:
+                  labels: true
+                  state: true
+              - type: 'custom:mini-graph-card'
+                name: Humidity
+                icon: 'mdi:water'
+                entities:
+                  - entity: sensor.ble_humidity_master_bedroom_temp_sensor
+                    name: Bedroom
+                    show_state: true
+                    color: green
+                    state_adaptive_color: true
+                  - entity: sensor.ble_humidity_office_temp_sensor
+                    name: Office
+                    show_state: true
+                    state_adaptive_color: true
+                  - entity: sensor.ble_humidity_studio_temp_sensor
+                    name: Studio
+                    show_state: true
+                    state_adaptive_color: true
+                show:
+                  labels: true
+      - type: vertical-stack
+        cards:
+          - type: picture-glance
+            image: 'https://demo.home-assistant.io/stub_config/kitchen.png'
+            entities:
+              - entity: camera.unknown_profile_0
+            title: Bedroom
+            camera_image: camera.unknown_profile_0
+            camera_view: live
+            entity: camera.unknown_profile_0
+            tap_action:
+              action: more-info
+  - title: Stats
+    path: stats
+    icon: 'mdi:buffer'
+    panel: false
+    badges: []
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:mini-graph-card'
+            name: Ping
+            entities:
+              - sensor.speedtest_ping
+            line_color: '#4481eb'
+            line_width: 8
+            font_size: 65
+          - type: 'custom:mini-graph-card'
+            name: Down
+            entities:
+              - sensor.speedtest_download
+            line_color: '#4481eb'
+            line_width: 8
+            font_size: 65
+          - type: 'custom:mini-graph-card'
+            name: Up
+            entities:
+              - sensor.speedtest_upload
+            line_color: '#4481eb'
+            line_width: 8
+            font_size: 65
+      - type: horizontal-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: sensor.denmark_coronavirus_current
+              - entity: sensor.ukraine_coronavirus_current
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:mini-graph-card'
+            name: CPU Used
+            font_size: 75
+            entities:
+              - sensor.processor_use_percent
+            show:
+              labels: true
+            color_thresholds:
+              - value: 5
+                color: '#f39c12'
+              - value: 10
+                color: '#d35400'
+              - value: 25
+                color: '#c0392b'
+          - type: 'custom:mini-graph-card'
+            name: RAM Used
+            font_size: 75
+            entities:
+              - sensor.memory_use
+            show:
+              labels: true
+            color_thresholds:
+              - value: 10
+                color: '#f39c12'
+              - value: 15
+                color: '#d35400'
+              - value: 25
+                color: '#c0392b'
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:mini-graph-card'
+            name: Disk Used
+            font_size: 75
+            entities:
+              - sensor.disk_use
+            show:
+              labels: true
+            color_thresholds:
+              - value: 10
+                color: '#f39c12'
+              - value: 15
+                color: '#d35400'
+              - value: 25
+                color: '#c0392b'
+          - type: 'custom:mini-graph-card'
+            name: Swap Used
+            font_size: 75
+            entities:
+              - sensor.swap_use
+            show:
+              labels: true
+            color_thresholds:
+              - value: 5
+                color: '#f39c12'
+              - value: 7
+                color: '#d35400'
+              - value: 10
+                color: '#c0392b'
+  - title: Lights
+    path: lights
+    icon: 'mdi:lightbulb-group'
+    badges: []
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: light.office_light
+              - type: 'custom:rgb-light-card'
+                entity: light.office_light
+                colors:
+                  - rgb_color:
+                      - 255
+                      - 229
+                      - 204
+                    brightness_pct: 100
+                    transition: 1
+                  - kelvin: 6500
+              - entity: light.yeelight_color_0x00000000053a2c02
+                name: Floor Lamp
+              - type: 'custom:rgb-light-card'
+                entity: light.yeelight_color_0x00000000053a2c02
+                colors:
+                  - rgb_color:
+                      - 255
+                      - 229
+                      - 204
+                    brightness_pct: 100
+                    transition: 1
+                  - kelvin: 6500
+              - entity: light.yeelight_color_0x0000000005e28b63
+                name: Bedroom Bulb
+              - type: 'custom:rgb-light-card'
+                entity: light.yeelight_color_0x0000000005e28b63
+                colors:
+                  - rgb_color:
+                      - 255
+                      - 229
+                      - 204
+                    brightness_pct: 100
+                    transition: 1
+                  - kelvin: 6500
